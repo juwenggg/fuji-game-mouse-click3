@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Fuji-Haya Electric - Game</title>
+    <!-- favicon -->
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="assets\FUJI-HAYA LOGO [2.5k pix].png"
+      sizes="16x16"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <script type="text/javascript" src="phaser.min.js"></script>
+    <script type="text/javascript" src="volume-meter.js"></script>
+    <script type="text/javascript" src="controller.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Game font -->
+    <link href="https://fonts.cdnfonts.com/css/games" rel="stylesheet" />
+
+    <style>
+      body {
+        background: url("assets/electric.webp") no-repeat fixed center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        overflow: hidden;
+        touch-action: none;
+        -ms-touch-action: none;
+      }
+      #prizes {
+        position: absolute;
+        right: 5rem;
+        top: 7rem;
+        color: #0077ff;
+      }
+      canvas {
+        touch-action: none;
+        -ms-touch-action: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      #gameContainer {
+        touch-action: none;
+        -ms-touch-action: none;
+      }
+    </style>
+  </head>
+  <body style="background-color: #181717">
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModalCenter"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+      style="pointer-events: none"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered"
+        role="document"
+        style="min-width: 650px; pointer-events: auto"
+      >
+        <div
+          class="modal-content"
+          style="background-color: rgb(218, 232, 250); border-radius: 30px"
+        >
+          <div class="modal-header">
+            <h5
+              class="modal-title"
+              id="exampleModalLongTitle"
+              style="font-size: 25px; font-family: 'Games', sans-serif"
+            >
+              Game Instructions 🎮
+            </h5>
+            <img
+              src="assets/electric-man.png"
+              alt="Instructions Icon"
+              style="
+                width: 80px;
+                height: 30%;
+                margin-left: 10px;
+                position: absolute;
+                right: 5.5rem;
+                top: -85px;
+              "
+            />
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              style="pointer-events: auto"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div
+            class="modal-body"
+            style="font-size: 20px; line-height: 1.6; color: #333"
+          >
+            <ul style="list-style-type: none; padding: 0">
+              <li style="margin-bottom: 15px">
+                1. <strong>Dodge the pipes</strong> - Don't let the circuit
+                breaker get stuck!
+              </li>
+              <li style="margin-bottom: 15px">
+                2. <strong>Shout loud</strong> - Your voice makes the circuit
+                breaker soar! 📢
+              </li>
+              <li style="margin-bottom: 15px">
+                3. <strong>Stay alert</strong> - Unexpected twists are coming
+                your way! ⚡
+              </li>
+              <li style="margin-bottom: 15px">
+                4. <strong>Aim high</strong> - The higher your score, the bigger
+                the prize! 🏆
+              </li>
+              <li>
+                5. <strong>Enjoy the ride</strong> - It's all about fun! 😊
+              </li>
+              <br />
+              <li>Get ready, aim, shout, and win! 🎉</li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <img
+              src="assets/electric-cog.png"
+              alt="Santa Hat"
+              style="width: 60px; height: 50px; margin-right: 27rem"
+            />
+            <button
+              type="button"
+              id="modalGotItBtn"
+              class="btn btn-primary btn-lg"
+              style="pointer-events: auto"
+            >
+              Got it!
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        // Show modal
+        $("#exampleModalCenter").modal("show");
+
+        // Handle Got it button
+        $("#modalGotItBtn").on("click touchstart", function (e) {
+          console.log("✅ Got it clicked!");
+          $("#exampleModalCenter").modal("hide");
+
+          // Force cleanup after modal hides
+          setTimeout(function () {
+            $(".modal-backdrop").remove();
+            $("body").removeClass("modal-open").css("overflow", "");
+            console.log("✅ Modal cleaned up - game ready!");
+          }, 500);
+        });
+
+        // Also handle X button
+        $(".close").on("click touchstart", function (e) {
+          console.log("✅ Close clicked!");
+          $("#exampleModalCenter").modal("hide");
+          setTimeout(function () {
+            $(".modal-backdrop").remove();
+            $("body").removeClass("modal-open").css("overflow", "");
+          }, 500);
+        });
+      });
+    </script>
+
+    <!-- <div id="gameTitle">FUJI-HAYA Electric Corp.</div> -->
+    <div id="gameTitle">
+      <!-- <img src="assets\web-bg.PNG" alt="Game Title"> -->
+      <div class="neon-text">FUJI-HAYA ELECTRIC CORP.</div>
+    </div>
+    <div id="gameContainer"></div>
+
+    <!-- Simple HTML Start Button -->
+    <button
+      id="simpleStartBtn"
+      style="
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 99999;
+        padding: 30px 60px;
+        font-size: 40px;
+        font-weight: bold;
+        background: linear-gradient(45deg, #00ff00, #00cc00);
+        color: white;
+        border: 5px solid #fff;
+        border-radius: 20px;
+        cursor: pointer;
+        font-family: 'Games', sans-serif;
+        display: none;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      "
+    >
+      🎮 TAP TO START 🎮
+    </button>
+
+    <script>
+      // Wait for game to load
+      setTimeout(function () {
+        // Show the simple button after modal closes
+        $("#exampleModalCenter").on("hidden.bs.modal", function () {
+          document.getElementById("simpleStartBtn").style.display = "block";
+        });
+
+        // Handle button clicks
+        var startBtn = document.getElementById("simpleStartBtn");
+
+        function startGame(e) {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+          console.log("🎮 SIMPLE START BUTTON ACTIVATED!");
+
+          // Access the global game variable
+          if (window.game) {
+            window.game.paused = false;
+            if (window.button) window.button.visible = false;
+            startBtn.style.display = "none";
+            console.log("✅ Game started successfully!");
+          } else {
+            console.error("❌ Game not loaded yet!");
+          }
+        }
+
+        startBtn.addEventListener("click", startGame);
+        startBtn.addEventListener("touchstart", startGame);
+        startBtn.addEventListener("pointerdown", startGame);
+      }, 1000);
+    </script>
+  </body>
+</html>
