@@ -446,55 +446,6 @@ window.onload = function () {
       0
     );
     restartButton.anchor.set(0.5);
-
-    // Add HTML restart button for touch support - DELAYED to ensure visibility
-    setTimeout(function () {
-      console.log("🔴 Creating red restart button...");
-      var htmlRestartBtn = document.createElement("button");
-      htmlRestartBtn.id = "htmlRestartButton";
-      htmlRestartBtn.innerHTML = "";
-      htmlRestartBtn.style.cssText = `
-      position: fixed;
-      top: 0%;
-      left: 0%;
-      width: 100vw;
-      height: 100vh;
-      transform: translate(0, 0);
-      z-index: 999999;
-      padding: 25px 50px;
-      font-size: 35px;
-      font-weight: bold;
-      background: transparent;
-      color: white;
-      cursor: pointer;
-      font-family: 'Games', sans-serif;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-      pointer-events: auto;
-    `;
-
-      function handleRestart(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log("🔄 Red button clicked/touched!");
-        restartGame();
-      }
-
-      htmlRestartBtn.addEventListener("click", handleRestart);
-      htmlRestartBtn.addEventListener("touchstart", handleRestart);
-      htmlRestartBtn.addEventListener("pointerdown", handleRestart);
-
-      document.body.appendChild(htmlRestartBtn);
-      console.log("✅ Red restart button added to page!");
-    }, 100);
-  }
-
-  function restartGame() {
-    console.log("🔄 RESTARTING GAME...");
-    // Remove the restart button if it exists
-    var btn = document.getElementById("htmlRestartButton");
-    if (btn) btn.remove();
-    location.reload();
   }
 
   function restartGame() {

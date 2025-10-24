@@ -466,6 +466,8 @@ window.onload = function () {
       font-weight: bold;
       background: transparent;
       color: white;
+      border: 5px solid #fff;
+      border-radius: 20px;
       cursor: pointer;
       font-family: 'Games', sans-serif;
       box-shadow: 0 10px 30px rgba(0,0,0,0.8);

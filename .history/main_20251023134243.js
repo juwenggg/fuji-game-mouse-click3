@@ -455,17 +455,17 @@ window.onload = function () {
       htmlRestartBtn.innerHTML = "";
       htmlRestartBtn.style.cssText = `
       position: fixed;
-      top: 0%;
-      left: 0%;
-      width: 100vw;
-      height: 100vh;
-      transform: translate(0, 0);
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       z-index: 999999;
       padding: 25px 50px;
       font-size: 35px;
       font-weight: bold;
-      background: transparent;
+      background: linear-gradient(45deg, #ff6b6b, #ff4757);
       color: white;
+      border: 5px solid #fff;
+      border-radius: 20px;
       cursor: pointer;
       font-family: 'Games', sans-serif;
       box-shadow: 0 10px 30px rgba(0,0,0,0.8);

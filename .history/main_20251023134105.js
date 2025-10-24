@@ -452,24 +452,22 @@ window.onload = function () {
       console.log("🔴 Creating red restart button...");
       var htmlRestartBtn = document.createElement("button");
       htmlRestartBtn.id = "htmlRestartButton";
-      htmlRestartBtn.innerHTML = "";
+      htmlRestartBtn.innerHTML = "🔄 TAP TO RESTART 🔄";
       htmlRestartBtn.style.cssText = `
       position: fixed;
-      top: 0%;
-      left: 0%;
-      width: 100vw;
-      height: 100vh;
-      transform: translate(0, 0);
-      z-index: 999999;
-      padding: 25px 50px;
-      font-size: 35px;
-      font-weight: bold;
-      background: transparent;
-      color: white;
-      cursor: pointer;
-      font-family: 'Games', sans-serif;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        top: 0%;
+        left: 0%;
+        width: 100vw;
+        height: 100vh;
+        transform: translate(0, 0);
+        z-index: 99999;
+        padding: 0;
+        font-size: 40px;
+        font-weight: bold;
+        background: transparent;
+        cursor: pointer;
+        font-family: 'Games', sans-serif;
+        display: none;
       pointer-events: auto;
     `;
 

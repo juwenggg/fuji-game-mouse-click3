@@ -464,8 +464,10 @@ window.onload = function () {
       padding: 25px 50px;
       font-size: 35px;
       font-weight: bold;
-      background: transparent;
+      background: linear-gradient(45deg, #ff6b6b, #ff4757);
       color: white;
+      border: 5px solid #fff;
+      border-radius: 20px;
       cursor: pointer;
       font-family: 'Games', sans-serif;
       box-shadow: 0 10px 30px rgba(0,0,0,0.8);
